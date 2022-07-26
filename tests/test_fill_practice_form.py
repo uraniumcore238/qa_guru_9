@@ -9,6 +9,7 @@ from controls.table_checking import TableChecking
 from pages.choose_date_page import ChooseDatePage
 from pages.practice_form_page import PracticeFormPage
 from pages.result_page import ResultPage
+from utils import attach
 
 
 class TestFillPracticeForm:
@@ -56,3 +57,7 @@ class TestFillPracticeForm:
                                                                        'Hobbies Sports, Reading, Music Picture image.png '
                                                                        'Address Current address State and City '
                                                                        'Rajasthan Jaipur')
+            attach.add_logs(browser)
+            attach.add_html(browser)
+            attach.add_screenshot(browser)
+            # attach.add_video(browser)
