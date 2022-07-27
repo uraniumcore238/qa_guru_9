@@ -9,6 +9,9 @@ from controls.table_checking import TableChecking
 from pages.choose_date_page import ChooseDatePage
 from pages.practice_form_page import PracticeFormPage
 from pages.result_page import ResultPage
+from selenium.webdriver.chrome.options import Options
+from selenium import webdriver
+
 from utils import attach
 
 
@@ -20,8 +23,24 @@ class TestFillPracticeForm:
     @allure.story('Fill student registration form')
     def test_fill_practice_form(self):
 
+        options = Options()
+        selenoid_capabilities = {
+            "browserName": "chrome",
+            "browserVersion": "100.0",
+            "selenoid:options": {
+                "enableVNC": True,
+                "enableVideo": True
+            }
+        }
+        options.capabilities.update(selenoid_capabilities)
+
+        driver = webdriver.Remote(command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub", options=options)
+        # driver = webdriver.Remote(command_executor="http://localhost:4444/wd/hub", options=options)
+        browser.config.driver = driver
+
+
         with allure.step('Open browser'):
-            browser.open('/automation-practice-form')
+            browser.open('https://demoqa.com/automation-practice-form')
         with allure.step('Assert text in header'):
             PracticeFormPage.main_header.should(have.exact_text('Practice Form'))
         with allure.step('Fill the name'):
@@ -57,7 +76,8 @@ class TestFillPracticeForm:
                                                                        'Hobbies Sports, Reading, Music Picture image.png '
                                                                        'Address Current address State and City '
                                                                        'Rajasthan Jaipur')
-            attach.add_logs(browser)
-            attach.add_html(browser)
-            attach.add_screenshot(browser)
-            # attach.add_video(browser)
+
+        attach.add_html(browser)
+        attach.add_screenshot(browser)
+        attach.add_logs(browser)
+        attach.add_video(browser)
