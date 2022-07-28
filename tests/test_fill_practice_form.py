@@ -9,9 +9,6 @@ from controls.table_checking import TableChecking
 from pages.choose_date_page import ChooseDatePage
 from pages.practice_form_page import PracticeFormPage
 from pages.result_page import ResultPage
-from selenium.webdriver.chrome.options import Options
-from selenium import webdriver
-
 from utils import attach
 
 
@@ -22,23 +19,6 @@ class TestFillPracticeForm:
     @allure.label("owner", "uraniumcore238")
     @allure.story('Fill student registration form')
     def test_fill_practice_form(self):
-
-        options = Options()
-        selenoid_capabilities = {
-            "browserName": "chrome",
-            "browserVersion": "100.0",
-            "selenoid:options": {
-                "enableVNC": True,
-                "enableVideo": True
-            }
-        }
-        options.capabilities.update(selenoid_capabilities)
-
-        driver = webdriver.Remote(command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub", options=options)
-        # driver = webdriver.Remote(command_executor="http://localhost:4444/wd/hub", options=options)
-        browser.config.driver = driver
-
-
         with allure.step('Open browser'):
             browser.open('https://demoqa.com/automation-practice-form')
         with allure.step('Assert text in header'):
@@ -77,7 +57,4 @@ class TestFillPracticeForm:
                                                                        'Address Current address State and City '
                                                                        'Rajasthan Jaipur')
 
-        attach.add_html(browser)
-        attach.add_screenshot(browser)
-        attach.add_logs(browser)
-        attach.add_video(browser)
+
