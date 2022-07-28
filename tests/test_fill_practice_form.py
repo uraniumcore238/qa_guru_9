@@ -1,6 +1,6 @@
 import allure
 from selene import have
-from selene.support.shared import browser
+# from selene.support.shared import browser
 from controls.checkbox_actions import CheckboxActions
 from controls.feel_value import FeelValue
 from advertisement_helper import remove_advertisement
@@ -9,7 +9,7 @@ from controls.table_checking import TableChecking
 from pages.choose_date_page import ChooseDatePage
 from pages.practice_form_page import PracticeFormPage
 from pages.result_page import ResultPage
-from utils import attach
+from tests.conftest import setup_chrome
 
 
 class TestFillPracticeForm:
@@ -19,6 +19,8 @@ class TestFillPracticeForm:
     @allure.label("owner", "uraniumcore238")
     @allure.story('Fill student registration form')
     def test_fill_practice_form(self, setup_chrome):
+        browser = setup_chrome
+
         with allure.step('Open browser'):
             browser.open('https://demoqa.com/automation-practice-form')
         with allure.step('Assert text in header'):

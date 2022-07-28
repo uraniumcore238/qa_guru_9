@@ -23,8 +23,8 @@ def setup_chrome():
     driver = webdriver.Remote(command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub", options=options)
     # driver = webdriver.Remote(command_executor="http://localhost:4444/wd/hub", options=options)
 
-    browser = Browser(Config(driver))
-    # browser.config.driver = driver
+    # browser = Browser(Config(driver))
+    browser.config.driver = driver
 
     yield browser
 
