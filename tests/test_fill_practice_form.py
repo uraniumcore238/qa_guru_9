@@ -18,7 +18,7 @@ class TestFillPracticeForm:
     @allure.story('Check the student registration form filling')
     @allure.label("owner", "uraniumcore238")
     @allure.story('Fill student registration form')
-    def test_fill_practice_form(self):
+    def test_fill_practice_form(self, setup_chrome):
         with allure.step('Open browser'):
             browser.open('https://demoqa.com/automation-practice-form')
         with allure.step('Assert text in header'):
