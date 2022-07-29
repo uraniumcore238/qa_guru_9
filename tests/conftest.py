@@ -1,9 +1,11 @@
+import os
+
 import pytest
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selene.support.shared import browser
 from selene import Browser, Config
-
+from dotenv import load_dotenv
 from utils import attach
 
 def pytest_addoption(parser):
@@ -17,6 +19,9 @@ def pytest_addoption(parser):
 #     return request.config.getoption('--browser')
 
 
+@pytest.fixture(scope='session', autouse=True)
+def load_env():
+    load_dotenv()
 
 @pytest.fixture(scope='function')
 def setup_browser(request):
@@ -32,7 +37,9 @@ def setup_browser(request):
     }
     options.capabilities.update(selenoid_capabilities)
 
-    driver = webdriver.Remote(command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub", options=options)
+    login = os.getenv('LOGIN')
+    password = os.getenv('PASSWORD')
+    driver = webdriver.Remote(command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub", options=options)
     # driver = webdriver.Remote(command_executor="http://localhost:4444/wd/hub", options=options)
 
     # browser = Browser(Config(driver))
