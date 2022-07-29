@@ -14,14 +14,11 @@ def pytest_addoption(parser):
         default='100.0'
     )
 
-# @pytest.fixture(scope='session')
-# def browser_name(request):
-#     return request.config.getoption('--browser')
-
 
 @pytest.fixture(scope='session', autouse=True)
 def load_env():
     load_dotenv()
+
 
 @pytest.fixture(scope='function')
 def setup_browser(request):
@@ -42,7 +39,6 @@ def setup_browser(request):
     driver = webdriver.Remote(command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub", options=options)
     # driver = webdriver.Remote(command_executor="http://localhost:4444/wd/hub", options=options)
 
-    # browser = Browser(Config(driver))
     browser.config.driver = driver
 
     yield browser
