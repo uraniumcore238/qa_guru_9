@@ -9,7 +9,6 @@ from controls.table_checking import TableChecking
 from pages.choose_date_page import ChooseDatePage
 from pages.practice_form_page import PracticeFormPage
 from pages.result_page import ResultPage
-from tests.conftest import setup_chrome
 
 
 class TestFillPracticeForm:
@@ -18,8 +17,8 @@ class TestFillPracticeForm:
     @allure.story('Check the student registration form filling')
     @allure.label("owner", "uraniumcore238")
     @allure.story('Fill student registration form')
-    def test_fill_practice_form(self, setup_chrome):
-        browser = setup_chrome
+    def test_fill_practice_form(self, setup_browser):
+        browser = setup_browser
 
         with allure.step('Open browser'):
             browser.open('https://demoqa.com/automation-practice-form')
